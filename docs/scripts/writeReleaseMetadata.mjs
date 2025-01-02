@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import { simpleGit } from 'simple-git';
-import semver from 'semver';
+// import semver from 'semver';
 import { readSvgDirectory } from '@lucide/helpers';
 
 const DATE_OF_FORK = '2020-06-08T16:39:52+0100';
@@ -29,19 +29,20 @@ if (!fs.existsSync(releaseMetaDataDirectory)) {
   fs.mkdirSync(releaseMetaDataDirectory);
 }
 
-const fetchAllReleases = async () => {
-  await git.fetch('https://github.com/lucide-icons/lucide.git', '--tags');
+// const fetchAllReleases = async () => {
+//   await git.fetch('https://gitee.com/wair-ac/lucide.git', '--tags');
 
-  return Promise.all(
-    (await git.tag(['-l']))
-      .trim()
-      .split(/\n/)
-      .filter((tag) => semver.valid(tag))
-      .sort(semver.compare),
-  );
-};
+//   return Promise.all(
+//     (await git.tag(['-l']))
+//       .trim()
+//       .split(/\n/)
+//       .filter((tag) => semver.valid(tag))
+//       .sort(semver.compare),
+//   );
+// };
 
-const tags = await fetchAllReleases();
+// const tags = await fetchAllReleases();
+const tags = ['v0.0.0'];
 
 const comparisonsPromises = tags.map(async (tag, index) => {
   const previousTag = tags[index - 1];
